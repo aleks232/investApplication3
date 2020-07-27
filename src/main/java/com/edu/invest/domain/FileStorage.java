@@ -7,7 +7,7 @@ import java.util.Objects;
 import javax.persistence.*;
 
 /**
- * @author Andrey Kustov on 30.06.2018
+ *
  */
 @Entity
 @Table(name = "file_storage")
