@@ -3,7 +3,8 @@ jib {
         image = "adoptopenjdk:11-jre-hotspot"
     }
     to {
-        image = "investapplication3:latest"
+        image = "aleks23202/investapplication"
+        tags = ['latest']
     }
     container {
         entrypoint = ["bash", "-c", "/entrypoint.sh"]
