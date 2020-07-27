@@ -1,0 +1,53 @@
+{
+  "name": "Lots",
+  "fields": [
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "minPrice",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "messages",
+      "otherEntityRelationshipName": "lot",
+      "javadoc": "A relationship",
+      "relationshipName": "messages"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "orders",
+      "otherEntityRelationshipName": "lot",
+      "relationshipName": "orders"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "packages",
+      "otherEntityRelationshipName": "lot",
+      "relationshipName": "packages"
+    }
+  ],
+  "changelogDate": "20200727114643",
+  "entityTableName": "lots",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

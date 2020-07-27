@@ -1,0 +1,27 @@
+{
+  "investApplication3App": {
+    "messages": {
+      "home": {
+        "title": "Messages",
+        "createLabel": "Create a new Messages",
+        "createOrEditLabel": "Create or edit a Messages",
+        "notFound": "No Messages found"
+      },
+      "created": "A new Messages is created with identifier {{ param }}",
+      "updated": "A Messages is updated with identifier {{ param }}",
+      "deleted": "A Messages is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Messages {{ id }}?"
+      },
+      "detail": {
+        "title": "Messages"
+      },
+      "message": "Message",
+      "notificationType": "Notification Type",
+      "createDate": "Create Date",
+      "confirmDate": "Confirm Date",
+      "employeeId": "Employee Id",
+      "lot": "Lot"
+    }
+  }
+}

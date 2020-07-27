@@ -1,0 +1,37 @@
+{
+  "name": "Documents",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "packages",
+      "otherEntityRelationshipName": "documents",
+      "relationshipName": "packageDocument",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200727115043",
+  "entityTableName": "documents",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

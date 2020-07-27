@@ -1,0 +1,88 @@
+// an ignored comment
+/** not an ignored comment */
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+entity Messages {
+	message String,
+	notificationType NotificationType,
+    createDate Instant,
+	confirmDate Instant,
+    employeeId Long
+}
+
+enum NotificationType {
+	EMAIL, TELEGRAM
+}
+
+entity Lots {
+	description String,
+	minPrice Long,
+    startDate Instant,
+	endDate Instant
+}
+
+entity Orders {
+	startDate Instant,
+	endDate Instant,
+    price Long,
+    paymentType PaymentType,
+    orderStatus OrderStatus,
+    employeeId Long
+}
+
+enum OrderStatus {
+	CREATED, 
+    SIGN_ONLINE, 
+    PAYMENT_CREATED, 
+    CREATED_PACKAGE, 
+    SIGN_PERSON,
+    EDIT_BUDGET,
+    PAYMENT_CREATED_DECISION,
+    PAY_DIVIDENTS
+}
+
+entity Payments {
+	sendDate Instant,
+	paymentDate Instant,
+    price Long,
+    employeeId Long
+}
+
+enum PaymentType {
+	CACHE, CARD
+}
+
+entity Packages {
+	title String,
+	description String
+}
+
+entity Documents {
+	title String,
+	description String,
+    type String
+}
+
+relationship OneToMany {
+	/**
+	* A relationship
+	*/
+    Lots to Messages{lot},
+    Lots to Orders{lot},
+    Lots to Packages{lot},
+    Packages to Documents{packageDocument},
+    Orders to Payments{order}
+}
+
+// Set pagination options
+paginate Lots, Messages with pagination
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Role
+

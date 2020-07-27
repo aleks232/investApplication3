@@ -1,0 +1,26 @@
+{
+  "investApplication3App": {
+    "payments": {
+      "home": {
+        "title": "Payments",
+        "createLabel": "Создать новый Payments",
+        "createOrEditLabel": "Создать или отредактировать Payments",
+        "notFound": "No Payments found"
+      },
+      "created": "Новый Payments создан с идентификатором {{ param }}",
+      "updated": "Payments обновлен с идентификатором {{ param }}",
+      "deleted": "Payments удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Payments {{ id }}?"
+      },
+      "detail": {
+        "title": "Payments"
+      },
+      "sendDate": "Send Date",
+      "paymentDate": "Payment Date",
+      "price": "Price",
+      "employeeId": "Employee Id",
+      "order": "Order"
+    }
+  }
+}

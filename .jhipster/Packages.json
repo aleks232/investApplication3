@@ -1,0 +1,39 @@
+{
+  "name": "Packages",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "documents",
+      "otherEntityRelationshipName": "packageDocument",
+      "relationshipName": "documents"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "lots",
+      "otherEntityRelationshipName": "packages",
+      "relationshipName": "lot",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200727114943",
+  "entityTableName": "packages",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,25 @@
+{
+  "investApplication3App": {
+    "packages": {
+      "home": {
+        "title": "Packages",
+        "createLabel": "Создать новый Packages",
+        "createOrEditLabel": "Создать или отредактировать Packages",
+        "notFound": "No Packages found"
+      },
+      "created": "Новый Packages создан с идентификатором {{ param }}",
+      "updated": "Packages обновлен с идентификатором {{ param }}",
+      "deleted": "Packages удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Packages {{ id }}?"
+      },
+      "detail": {
+        "title": "Packages"
+      },
+      "title": "Title",
+      "description": "Description",
+      "documents": "Documents",
+      "lot": "Lot"
+    }
+  }
+}

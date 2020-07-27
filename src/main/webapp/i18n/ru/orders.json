@@ -1,0 +1,29 @@
+{
+  "investApplication3App": {
+    "orders": {
+      "home": {
+        "title": "Orders",
+        "createLabel": "Создать новый Orders",
+        "createOrEditLabel": "Создать или отредактировать Orders",
+        "notFound": "No Orders found"
+      },
+      "created": "Новый Orders создан с идентификатором {{ param }}",
+      "updated": "Orders обновлен с идентификатором {{ param }}",
+      "deleted": "Orders удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Orders {{ id }}?"
+      },
+      "detail": {
+        "title": "Orders"
+      },
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "price": "Price",
+      "paymentType": "Payment Type",
+      "orderStatus": "Order Status",
+      "employeeId": "Employee Id",
+      "payments": "Payments",
+      "lot": "Lot"
+    }
+  }
+}
