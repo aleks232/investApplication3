@@ -1,0 +1,57 @@
+{
+  "name": "Orders",
+  "fields": [
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "paymentType",
+      "fieldType": "PaymentType",
+      "fieldValues": "CACHE,CARD"
+    },
+    {
+      "fieldName": "orderStatus",
+      "fieldType": "OrderStatus",
+      "fieldValues": "CREATED,SIGN_ONLINE,PAYMENT_CREATED,CREATED_PACKAGE,SIGN_PERSON,EDIT_BUDGET,PAYMENT_CREATED_DECISION,PAY_DIVIDENTS"
+    },
+    {
+      "fieldName": "employeeId",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "payments",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "payments"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "lots",
+      "otherEntityRelationshipName": "orders",
+      "relationshipName": "lot",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200727114743",
+  "entityTableName": "orders",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

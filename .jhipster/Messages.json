@@ -1,0 +1,47 @@
+{
+  "name": "Messages",
+  "fields": [
+    {
+      "fieldName": "message",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "notificationType",
+      "fieldType": "NotificationType",
+      "fieldValues": "EMAIL,TELEGRAM"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "confirmDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "employeeId",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "lots",
+      "otherEntityRelationshipName": "messages",
+      "relationshipName": "lot",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200727114543",
+  "javadoc": "Task entity.\\n@author The JHipster team.",
+  "entityTableName": "messages",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

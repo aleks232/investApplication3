@@ -1,0 +1,28 @@
+{
+  "investApplication3App": {
+    "lots": {
+      "home": {
+        "title": "Lots",
+        "createLabel": "Создать новый Lots",
+        "createOrEditLabel": "Создать или отредактировать Lots",
+        "notFound": "No Lots found"
+      },
+      "created": "Новый Lots создан с идентификатором {{ param }}",
+      "updated": "Lots обновлен с идентификатором {{ param }}",
+      "deleted": "Lots удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Lots {{ id }}?"
+      },
+      "detail": {
+        "title": "Lots"
+      },
+      "description": "Description",
+      "minPrice": "Min Price",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "messages": "Messages",
+      "orders": "Orders",
+      "packages": "Packages"
+    }
+  }
+}

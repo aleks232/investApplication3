@@ -1,0 +1,27 @@
+{
+  "investApplication3App": {
+    "messages": {
+      "home": {
+        "title": "Messages",
+        "createLabel": "Создать новый Messages",
+        "createOrEditLabel": "Создать или отредактировать Messages",
+        "notFound": "No Messages found"
+      },
+      "created": "Новый Messages создан с идентификатором {{ param }}",
+      "updated": "Messages обновлен с идентификатором {{ param }}",
+      "deleted": "Messages удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Messages {{ id }}?"
+      },
+      "detail": {
+        "title": "Messages"
+      },
+      "message": "Message",
+      "notificationType": "Notification Type",
+      "createDate": "Create Date",
+      "confirmDate": "Confirm Date",
+      "employeeId": "Employee Id",
+      "lot": "Lot"
+    }
+  }
+}

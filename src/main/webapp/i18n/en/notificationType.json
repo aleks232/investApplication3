@@ -1,0 +1,9 @@
+{
+  "investApplication3App": {
+    "NotificationType": {
+      "null": "",
+      "EMAIL": "EMAIL",
+      "TELEGRAM": "TELEGRAM"
+    }
+  }
+}
