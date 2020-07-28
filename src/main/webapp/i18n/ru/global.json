@@ -1,6 +1,6 @@
 {
   "global": {
-    "title": "InvestApplication3",
+    "title": "Портал инвестора",
     "browsehappy": "Ваш браузер <strong>устарел</strong>. Пожалуйста <a href=\"http://browsehappy.com/?locale=ru\">обновите ваш браузер</a>.",
     "menu": {
       "home": "Главная",
@@ -54,9 +54,9 @@
     "messages": {
       "info": {
         "authenticated": {
-          "prefix": "Если вы хотите ",
-          "link": "авторизироваться",
-          "suffix": ", вы можете попробовать аккаунты по умолчанию:<br/>- Администратор (логин=\"admin\" и пароль=\"admin\") <br/>- Пользователь (логин=\"user\" и пароль=\"user\")."
+          "prefix": "Пожалуйста, ",
+          "link": " авторизуйтесь ",
+          "suffix": "для дальнейшей работы"
         },
         "register": {
           "noaccount": "У вас нет аккаунта?",
