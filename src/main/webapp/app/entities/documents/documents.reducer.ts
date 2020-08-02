@@ -144,7 +144,7 @@ export const reset = () => ({
   type: ACTION_TYPES.RESET,
 });
 
-export const uploadFile = (formData: FormData) => async dispatch => {
+export const uploadFile: ICrudPutAction<FormData> = (formData: FormData) => async dispatch => {
   const uploadFileApi = '/api/rest/files/upload';
   const result = await dispatch({
     type: ACTION_TYPES.UPLOAD_FILE,
