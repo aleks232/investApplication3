@@ -4,6 +4,7 @@ export interface IDocuments {
   description?: string;
   type?: string;
   packageDocumentId?: number;
+  fileId?: number;
 }
 
 export const defaultValue: Readonly<IDocuments> = {};

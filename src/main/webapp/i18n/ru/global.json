@@ -1,18 +1,18 @@
 {
   "global": {
-    "title": "InvestApplication3",
+    "title": "Портал инвестирования",
     "browsehappy": "Ваш браузер <strong>устарел</strong>. Пожалуйста <a href=\"http://browsehappy.com/?locale=ru\">обновите ваш браузер</a>.",
     "menu": {
       "home": "Главная",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
-        "main": "Сущности",
-        "messages": "Messages",
-        "lots": "Lots",
-        "orders": "Orders",
+        "main": "Таблицы",
+        "messages": "Сообщения",
+        "lots": "Лоты",
+        "orders": "Заказы",
         "payments": "Payments",
-        "packages": "Packages",
-        "documents": "Documents",
+        "packages": "Пакеты документов",
+        "documents": "Документы",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -54,9 +54,9 @@
     "messages": {
       "info": {
         "authenticated": {
-          "prefix": "Если вы хотите ",
-          "link": "авторизироваться",
-          "suffix": ", вы можете попробовать аккаунты по умолчанию:<br/>- Администратор (логин=\"admin\" и пароль=\"admin\") <br/>- Пользователь (логин=\"user\" и пароль=\"user\")."
+          "prefix": "Пожалуйста, ",
+          "link": " авторизуйтесь ",
+          "suffix": "для дальнейшей работы"
         },
         "register": {
           "noaccount": "У вас нет аккаунта?",

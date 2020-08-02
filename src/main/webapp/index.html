@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>investApplication3</title>
+    <title>Invest Application</title>
     <meta name="description" content="Description for investApplication3">
     <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -74,6 +74,13 @@
     <script type="text/javascript" language="javascript">
         window.onload=function() {
             setTimeout(showError, 4000);
+            const the_title = document.querySelector("title");
+            const titles = {
+                ru: 'Портал инвестирования',
+                en: 'Invest application'
+            };
+            const locale = sessionStorage.getItem('locale');
+            the_title.innerHTML = titles[locale.substr(1,2)] ?? titles.en;
         }
         function showError() {
             var errorElm = document.getElementById("jhipster-error");

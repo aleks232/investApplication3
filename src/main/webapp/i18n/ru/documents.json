@@ -2,23 +2,24 @@
   "investApplication3App": {
     "documents": {
       "home": {
-        "title": "Documents",
-        "createLabel": "Создать новый Documents",
-        "createOrEditLabel": "Создать или отредактировать Documents",
-        "notFound": "No Documents found"
+        "title": "Документы",
+        "createLabel": "Создать новый документ",
+        "createOrEditLabel": "Создать или отредактировать документ",
+        "notFound": "Нет документов"
       },
-      "created": "Новый Documents создан с идентификатором {{ param }}",
-      "updated": "Documents обновлен с идентификатором {{ param }}",
-      "deleted": "Documents удален с идентификатором {{ param }}",
+      "created": "Новый документ создан с идентификатором {{ param }}",
+      "updated": "Документ обновлен с идентификатором {{ param }}",
+      "deleted": "Документ удален с идентификатором {{ param }}",
       "delete": {
-        "question": "Вы уверены что хотите удалить Documents {{ id }}?"
+        "question": "Вы уверены что хотите удалить документ {{ id }}?"
       },
       "detail": {
-        "title": "Documents"
+        "title": "Документ"
       },
-      "title": "Title",
-      "description": "Description",
-      "type": "Type",
+      "title": "Название",
+      "description": "Описание",
+      "type": "Тип",
+      "upload": "Файл",
       "packageDocument": "Package Document"
     }
   }

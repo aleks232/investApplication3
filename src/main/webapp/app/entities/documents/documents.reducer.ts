@@ -5,6 +5,7 @@ import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { IDocuments, defaultValue } from 'app/shared/model/documents.model';
+import { FileInfo } from 'app/swagger/model/fileInfo';
 
 export const ACTION_TYPES = {
   FETCH_DOCUMENTS_LIST: 'documents/FETCH_DOCUMENTS_LIST',
@@ -13,6 +14,7 @@ export const ACTION_TYPES = {
   UPDATE_DOCUMENTS: 'documents/UPDATE_DOCUMENTS',
   DELETE_DOCUMENTS: 'documents/DELETE_DOCUMENTS',
   RESET: 'documents/RESET',
+  UPLOAD_FILE: 'documents/UPLOAD_FILE',
 };
 
 const initialState = {
@@ -22,6 +24,7 @@ const initialState = {
   entity: defaultValue,
   updating: false,
   updateSuccess: false,
+  fileInfo: null as FileInfo,
 };
 
 export type DocumentsState = Readonly<typeof initialState>;
@@ -86,6 +89,11 @@ export default (state: DocumentsState = initialState, action): DocumentsState =>
         updateSuccess: true,
         entity: {},
       };
+    case SUCCESS(ACTION_TYPES.UPLOAD_FILE):
+      return {
+        ...state,
+        fileInfo: action.payload.data,
+      };
     case ACTION_TYPES.RESET:
       return {
         ...initialState,
@@ -142,3 +150,16 @@ export const deleteEntity: ICrudDeleteAction<IDocuments> = id => async dispatch 
 export const reset = () => ({
   type: ACTION_TYPES.RESET,
 });
+
+export const uploadFile: ICrudPutAction<FormData> = (formData: FormData) => async dispatch => {
+  const uploadFileApi = '/api/rest/files/upload';
+  const result = await dispatch({
+    type: ACTION_TYPES.UPLOAD_FILE,
+    payload: axios.post(uploadFileApi, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
+  });
+  return result;
+};

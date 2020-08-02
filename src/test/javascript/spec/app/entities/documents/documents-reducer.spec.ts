@@ -33,6 +33,7 @@ describe('Entities reducer tests', () => {
     entity: defaultValue,
     updating: false,
     updateSuccess: false,
+    fileInfo: null,
   };
 
   function testInitialState(state) {

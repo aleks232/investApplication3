@@ -1,6 +1,6 @@
 {
   "global": {
-    "title": "InvestApplication3",
+    "title": "Invest Application",
     "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
     "menu": {
       "home": "Home",
@@ -54,9 +54,9 @@
     "messages": {
       "info": {
         "authenticated": {
-          "prefix": "If you want to ",
-          "link": "sign in",
-          "suffix": ", you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\")."
+          "prefix": "Please",
+          "link": " sign in ",
+          "suffix": "for the futher work."
         },
         "register": {
           "noaccount": "You don't have an account yet?",

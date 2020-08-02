@@ -9,7 +9,7 @@ export const ACTION_TYPES = {
 const initialState = {
   ribbonEnv: '',
   inProduction: true,
-  isSwaggerEnabled: false,
+  isSwaggerEnabled: true,
 };
 
 export type ApplicationProfileState = Readonly<typeof initialState>;

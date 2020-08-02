@@ -19,6 +19,7 @@
       "title": "Title",
       "description": "Description",
       "type": "Type",
+      "upload": "File",
       "packageDocument": "Package Document"
     }
   }
