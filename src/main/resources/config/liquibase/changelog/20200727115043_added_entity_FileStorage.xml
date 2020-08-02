@@ -36,7 +36,8 @@
             <column name="data_load" type="datetime">
                 <constraints nullable="true" />
             </column>
-            <column name="file" type="blob">
+
+            <column name="file" type="bytea">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
