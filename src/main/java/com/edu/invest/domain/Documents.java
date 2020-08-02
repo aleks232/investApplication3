@@ -1,12 +1,10 @@
 package com.edu.invest.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
+import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
-import java.io.Serializable;
 
 /**
  * A Documents.
@@ -15,7 +13,6 @@ import java.io.Serializable;
 @Table(name = "documents")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Documents implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -31,6 +28,9 @@ public class Documents implements Serializable {
 
     @Column(name = "type")
     private String type;
+
+    @Column(name = "file_id")
+    private Long fileId;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "documents", allowSetters = true)
@@ -84,6 +84,14 @@ public class Documents implements Serializable {
         this.type = type;
     }
 
+    public Long getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(Long fileId) {
+        this.fileId = fileId;
+    }
+
     public Packages getPackageDocument() {
         return packageDocument;
     }
@@ -96,6 +104,7 @@ public class Documents implements Serializable {
     public void setPackageDocument(Packages packages) {
         this.packageDocument = packages;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
