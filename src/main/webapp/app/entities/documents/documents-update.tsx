@@ -17,7 +17,7 @@ export const DocumentsUpdate = (props: IDocumentsUpdateProps) => {
   const [packageDocumentId, setPackageDocumentId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { documentsEntity, packages, loading, updating } = props;
+  const { documentsEntity, packages, loading, updating, fileInfo } = props;
 
   const handleClose = () => {
     props.history.push('/documents');
@@ -44,6 +44,7 @@ export const DocumentsUpdate = (props: IDocumentsUpdateProps) => {
       const entity = {
         ...documentsEntity,
         ...values,
+        ...(fileInfo ? {fileId: fileInfo.id} : null)
       };
 
       if (isNew) {
@@ -60,6 +61,8 @@ export const DocumentsUpdate = (props: IDocumentsUpdateProps) => {
     const formData = getFormData(files, 'application/pdf');
     props.uploadFile(formData);
   }, [props.uploadFile])
+
+
 
   return (
     <div>
@@ -150,6 +153,7 @@ const mapStateToProps = (storeState: IRootState) => ({
   loading: storeState.documents.loading,
   updating: storeState.documents.updating,
   updateSuccess: storeState.documents.updateSuccess,
+  fileInfo: storeState.documents.fileInfo,
 });
 
 const mapDispatchToProps = {

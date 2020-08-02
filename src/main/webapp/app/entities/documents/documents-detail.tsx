@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import axios from 'axios';
+import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
@@ -7,17 +8,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
 import { getEntity } from './documents.reducer';
-import { IDocuments } from 'app/shared/model/documents.model';
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+import { saveBlobFile } from 'app/shared/util';
 
 export interface IDocumentsDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const DocumentsDetail = (props: IDocumentsDetailProps) => {
+  const { documentsEntity } = props;
+
+  const getFile = useCallback(async() => {
+    const url = `/api/rest/files/download/${documentsEntity.fileId}`;
+    try {
+      const fileData = await axios.get(url, { responseType: 'blob'});
+      const fileNameStringArray = fileData.headers['content-disposition'].split('filename=');
+
+      const filename = fileNameStringArray.length ? fileNameStringArray[1].replace(/"/g, '') : 'test.pdf';
+
+      saveBlobFile(fileData.data, filename, fileData.headers['content-type']);
+    } catch (e) {
+      console.error(e)
+    }
+  }, [documentsEntity]);
+
   useEffect(() => {
     props.getEntity(props.match.params.id);
   }, []);
 
-  const { documentsEntity } = props;
   return (
     <Row>
       <Col md="8">
@@ -43,9 +58,7 @@ export const DocumentsDetail = (props: IDocumentsDetailProps) => {
             </span>
           </dt>
           <dd>{documentsEntity.type}</dd>
-          <dt>
-            <Translate contentKey="investApplication3App.documents.packageDocument">Package Document</Translate>
-          </dt>
+          <dd><span onClick={getFile} style={{cursor: 'pointer', textDecoration: 'underline'}} >Скачать файл </span> </dd>
           <dd>{documentsEntity.packageDocumentId ? documentsEntity.packageDocumentId : ''}</dd>
         </dl>
         <Button tag={Link} to="/documents" replace color="info">

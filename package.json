@@ -123,6 +123,7 @@
     "cleanup": "rimraf build/resources/main/static/",
     "start": "npm run webpack:dev",
     "start-tls": "npm run webpack:dev -- --env.tls",
+    "swagger": "swagger-codegen generate -i http://localhost:8484/v2/api-docs -l typescript-angular -o src/main/webapp/app/swagger -Dmodels",
     "jest": "jest --coverage --logHeapUsage --maxWorkers=2 --config src/test/javascript/jest.conf.js",
     "jest:update": "npm run jest -- --updateSnapshot",
     "test": "npm run lint && npm run jest",
