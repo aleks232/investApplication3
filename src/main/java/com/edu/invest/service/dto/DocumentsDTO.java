@@ -6,7 +6,6 @@ import java.io.Serializable;
  * A DTO for the {@link com.edu.invest.domain.Documents} entity.
  */
 public class DocumentsDTO implements Serializable {
-    
     private Long id;
 
     private String title;
@@ -15,9 +14,10 @@ public class DocumentsDTO implements Serializable {
 
     private String type;
 
-
     private Long packageDocumentId;
-    
+
+    private Long fileId;
+
     public Long getId() {
         return id;
     }
@@ -56,6 +56,14 @@ public class DocumentsDTO implements Serializable {
 
     public void setPackageDocumentId(Long packagesId) {
         this.packageDocumentId = packagesId;
+    }
+
+    public Long getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(Long fileId) {
+        this.fileId = fileId;
     }
 
     @Override
