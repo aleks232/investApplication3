@@ -1,18 +1,18 @@
 {
   "global": {
-    "title": "Портал инвестора",
+    "title": "Портал инвестирования",
     "browsehappy": "Ваш браузер <strong>устарел</strong>. Пожалуйста <a href=\"http://browsehappy.com/?locale=ru\">обновите ваш браузер</a>.",
     "menu": {
       "home": "Главная",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
-        "main": "Сущности",
-        "messages": "Messages",
-        "lots": "Lots",
-        "orders": "Orders",
+        "main": "Таблицы",
+        "messages": "Сообщения",
+        "lots": "Лоты",
+        "orders": "Заказы",
         "payments": "Payments",
-        "packages": "Packages",
-        "documents": "Documents",
+        "packages": "Пакеты документов",
+        "documents": "Документы",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

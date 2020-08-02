@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Col, Label } from 'reactstrap';
+import { Button, Row, Col, Label, CustomFileInput } from 'reactstrap';
 import { AvFeedback, AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { IPackages } from 'app/shared/model/packages.model';
 import { getEntities as getPackages } from 'app/entities/packages/packages.reducer';
-import { getEntity, updateEntity, createEntity, reset } from './documents.reducer';
-import { IDocuments } from 'app/shared/model/documents.model';
-import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
-import { mapIdList } from 'app/shared/util/entity-utils';
+import { getEntity, updateEntity, createEntity, reset, uploadFile } from './documents.reducer';
+import { getFormData, initUploadFile } from 'app/entities/documents/utils';
 
 export interface IDocumentsUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
@@ -57,6 +54,13 @@ export const DocumentsUpdate = (props: IDocumentsUpdateProps) => {
     }
   };
 
+  const onFileChange = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const nativeFiles = Array.from(event.target.files || []);
+    const files = nativeFiles.map((file) => initUploadFile(file));
+    const formData = getFormData(files, 'application/pdf');
+    props.uploadFile(formData);
+  }, [props.uploadFile])
+
   return (
     <div>
       <Row className="justify-content-center">
@@ -97,6 +101,12 @@ export const DocumentsUpdate = (props: IDocumentsUpdateProps) => {
                   <Translate contentKey="investApplication3App.documents.type">Type</Translate>
                 </Label>
                 <AvField id="documents-type" type="text" name="type" />
+              </AvGroup>
+              <AvGroup>
+                <Label id="descriptionLabel" for="documents-description">
+                  <Translate contentKey="investApplication3App.documents.upload">Load file</Translate>
+                </Label>
+                <CustomFileInput id="document-file" onChange={onFileChange} />
               </AvGroup>
               <AvGroup>
                 <Label for="documents-packageDocument">
@@ -148,6 +158,7 @@ const mapDispatchToProps = {
   updateEntity,
   createEntity,
   reset,
+  uploadFile,
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

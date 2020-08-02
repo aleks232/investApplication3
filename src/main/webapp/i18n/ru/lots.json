@@ -2,27 +2,27 @@
   "investApplication3App": {
     "lots": {
       "home": {
-        "title": "Lots",
-        "createLabel": "Создать новый Lots",
-        "createOrEditLabel": "Создать или отредактировать Lots",
-        "notFound": "No Lots found"
+        "title": "Лоты",
+        "createLabel": "Создать новый лот",
+        "createOrEditLabel": "Создать или отредактировать лот",
+        "notFound": "Нет лотов"
       },
-      "created": "Новый Lots создан с идентификатором {{ param }}",
-      "updated": "Lots обновлен с идентификатором {{ param }}",
-      "deleted": "Lots удален с идентификатором {{ param }}",
+      "created": "Новый лот создан с идентификатором {{ param }}",
+      "updated": "Лот обновлен с идентификатором {{ param }}",
+      "deleted": "Лот удален с идентификатором {{ param }}",
       "delete": {
-        "question": "Вы уверены что хотите удалить Lots {{ id }}?"
+        "question": "Вы уверены что хотите удалить лот {{ id }}?"
       },
       "detail": {
-        "title": "Lots"
+        "title": "Лот"
       },
-      "description": "Description",
-      "minPrice": "Min Price",
-      "startDate": "Start Date",
-      "endDate": "End Date",
-      "messages": "Messages",
-      "orders": "Orders",
-      "packages": "Packages"
+      "description": "Описание",
+      "minPrice": "Минимальная цена",
+      "startDate": "Дата начала",
+      "endDate": "Конечная дата",
+      "messages": "Сообщения",
+      "orders": "Заказы",
+      "packages": "Пакеты документов"
     }
   }
 }

@@ -2,28 +2,28 @@
   "investApplication3App": {
     "orders": {
       "home": {
-        "title": "Orders",
-        "createLabel": "Создать новый Orders",
-        "createOrEditLabel": "Создать или отредактировать Orders",
-        "notFound": "No Orders found"
+        "title": "Заказы",
+        "createLabel": "Создать новый заказ",
+        "createOrEditLabel": "Создать или отредактировать заказ",
+        "notFound": "Нет заказов"
       },
-      "created": "Новый Orders создан с идентификатором {{ param }}",
-      "updated": "Orders обновлен с идентификатором {{ param }}",
-      "deleted": "Orders удален с идентификатором {{ param }}",
+      "created": "Новый заказ создан с идентификатором {{ param }}",
+      "updated": "Заказ обновлен с идентификатором {{ param }}",
+      "deleted": "Заказ удален с идентификатором {{ param }}",
       "delete": {
-        "question": "Вы уверены что хотите удалить Orders {{ id }}?"
+        "question": "Вы уверены что хотите удалить заказ {{ id }}?"
       },
       "detail": {
-        "title": "Orders"
+        "title": "Заказ"
       },
-      "startDate": "Start Date",
-      "endDate": "End Date",
-      "price": "Price",
-      "paymentType": "Payment Type",
-      "orderStatus": "Order Status",
+      "startDate": "Дата начала",
+      "endDate": "Конечная дата",
+      "price": "Цена",
+      "paymentType": "Тип платежа",
+      "orderStatus": "Статус заказа",
       "employeeId": "Employee Id",
-      "payments": "Payments",
-      "lot": "Lot"
+      "payments": "Платежи",
+      "lot": "Лот"
     }
   }
 }

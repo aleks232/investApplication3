@@ -8,10 +8,18 @@ import { Row, Col, Alert } from 'reactstrap';
 
 import { IRootState } from 'app/shared/reducers';
 
-export type IHomeProp = StateProps;
+import { getEntities } from 'app/entities/lots/lots.reducer';
+
+export interface IHomeProp extends StateProps, DispatchProps {}
 
 export const Home = (props: IHomeProp) => {
-  const { account } = props;
+  const { account, lots, getLots } = props;
+
+  const lastThreeLots = React.useMemo(() => lots.slice(-3), [lots]);
+
+  React.useEffect(() => {
+    getLots();
+  }, [])
 
   return (
     <Row>
@@ -28,6 +36,38 @@ export const Home = (props: IHomeProp) => {
                 You are logged in as user {account.login}.
               </Translate>
             </Alert>
+            <p>Последние открытые лоты:</p>
+            <ul>
+              {
+                lastThreeLots.map((lot) => (
+                  <li key={lot.id}>
+                    <Link to={`/lots/${lot.id}`}>
+                      Лот {lot.id}: {lot.description}
+                    </Link>
+                  </li>
+                ))
+              }
+            </ul>
+            <p>
+              Последние 5 пользователей получившие выплаты:
+            </p>
+            <ul>
+              <li>
+                Тобянин Сергей Семёнович
+              </li>
+              <li>
+                Сяббарова Елена Юрьевна
+              </li>
+              <li>
+                Бенькова Гульнара Валерьевна
+              </li>
+              <li>
+                Танчиков Евгений Александрович
+              </li>
+              <li>
+                Корбенко Александр Николаевич
+              </li>
+            </ul>
           </div>
         ) : (
           <div>
@@ -60,11 +100,15 @@ export const Home = (props: IHomeProp) => {
   );
 };
 
-const mapStateToProps = storeState => ({
+const mapStateToProps = (storeState: IRootState) => ({
   account: storeState.authentication.account,
   isAuthenticated: storeState.authentication.isAuthenticated,
+  lots: storeState.lots.entities,
 });
 
-type StateProps = ReturnType<typeof mapStateToProps>;
+const mapDispatchToProps = { getLots: getEntities };
 
-export default connect(mapStateToProps)(Home);
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

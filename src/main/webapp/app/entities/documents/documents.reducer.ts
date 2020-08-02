@@ -13,6 +13,7 @@ export const ACTION_TYPES = {
   UPDATE_DOCUMENTS: 'documents/UPDATE_DOCUMENTS',
   DELETE_DOCUMENTS: 'documents/DELETE_DOCUMENTS',
   RESET: 'documents/RESET',
+  UPLOAD_FILE: 'documents/UPLOAD_FILE',
 };
 
 const initialState = {
@@ -142,3 +143,16 @@ export const deleteEntity: ICrudDeleteAction<IDocuments> = id => async dispatch 
 export const reset = () => ({
   type: ACTION_TYPES.RESET,
 });
+
+export const uploadFile = (formData: FormData) => async dispatch => {
+  const uploadFileApi = '/api/rest/files/upload';
+  const result = await dispatch({
+    type: ACTION_TYPES.UPLOAD_FILE,
+    payload: axios.post(uploadFileApi, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
+  });
+  return result;
+};
