@@ -17,25 +17,26 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface IOrdersUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string, lotId?: string }> {}
 
 export const OrdersUpdate = (props: IOrdersUpdateProps) => {
-  const [lotId, setLotId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
   const { ordersEntity, lots, loading, updating, user } = props;
+
+  const lotId = props.match.params.lotId;
 
   const ordersForm = React.useMemo(
     () => {
       if (isNew) {
         return {
-          ...(lotId ? { lotId: Number(props.match.params.lotId)} : {}),
+          ...(lotId ? { lotId: Number(lotId)} : {}),
           employeeId: user.id
         }
       }
       return ordersEntity;
     }, []
-  )
+  );
 
   const handleClose = () => {
-    props.history.push('/orders');
+    lotId ? props.history.push(`/lots/${lotId}`) : props.history.push('/orders');
   };
 
   useEffect(() => {

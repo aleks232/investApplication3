@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
+import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction, IPayload } from 'react-jhipster';
 
 import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { IOrders, defaultValue } from 'app/shared/model/orders.model';
+import { checkObj } from 'app/shared/util';
 
 export const ACTION_TYPES = {
   FETCH_ORDERS_LIST: 'orders/FETCH_ORDERS_LIST',
@@ -13,12 +14,14 @@ export const ACTION_TYPES = {
   UPDATE_ORDERS: 'orders/UPDATE_ORDERS',
   DELETE_ORDERS: 'orders/DELETE_ORDERS',
   RESET: 'orders/RESET',
+  FETCH_FILTERED_ORDERS_LIST: 'orders/FETCH_FILTERED_ORDERS_LIST',
 };
 
 const initialState = {
   loading: false,
   errorMessage: null,
   entities: [] as ReadonlyArray<IOrders>,
+  filteredOrders: [] as ReadonlyArray<IOrders>,
   entity: defaultValue,
   updating: false,
   updateSuccess: false,
@@ -31,6 +34,7 @@ export type OrdersState = Readonly<typeof initialState>;
 export default (state: OrdersState = initialState, action): OrdersState => {
   switch (action.type) {
     case REQUEST(ACTION_TYPES.FETCH_ORDERS_LIST):
+    case REQUEST(ACTION_TYPES.FETCH_FILTERED_ORDERS_LIST):
     case REQUEST(ACTION_TYPES.FETCH_ORDERS):
       return {
         ...state,
@@ -49,6 +53,7 @@ export default (state: OrdersState = initialState, action): OrdersState => {
       };
     case FAILURE(ACTION_TYPES.FETCH_ORDERS_LIST):
     case FAILURE(ACTION_TYPES.FETCH_ORDERS):
+    case FAILURE(ACTION_TYPES.FETCH_FILTERED_ORDERS_LIST):
     case FAILURE(ACTION_TYPES.CREATE_ORDERS):
     case FAILURE(ACTION_TYPES.UPDATE_ORDERS):
     case FAILURE(ACTION_TYPES.DELETE_ORDERS):
@@ -64,6 +69,12 @@ export default (state: OrdersState = initialState, action): OrdersState => {
         ...state,
         loading: false,
         entities: action.payload.data,
+      };
+    case SUCCESS(ACTION_TYPES.FETCH_FILTERED_ORDERS_LIST):
+      return {
+        ...state,
+        loading: false,
+        filteredOrders: action.payload.data,
       };
     case SUCCESS(ACTION_TYPES.FETCH_ORDERS):
       return {
@@ -96,6 +107,7 @@ export default (state: OrdersState = initialState, action): OrdersState => {
 };
 
 const apiUrl = 'api/orders';
+const apiFilteredOrders = '/api/find/orders';
 
 // Actions
 
@@ -142,3 +154,11 @@ export const deleteEntity: ICrudDeleteAction<IOrders> = id => async dispatch => 
 export const reset = () => ({
   type: ACTION_TYPES.RESET,
 });
+
+export const getFilteredOrders: any = (params: { lotId: number; orderStatus?: string }) => async dispatch => {
+  const result: IPayload<IOrders> = await dispatch({
+    type: ACTION_TYPES.FETCH_FILTERED_ORDERS_LIST,
+    payload: axios.get(apiFilteredOrders, { params: checkObj(params) }),
+  });
+  return result;
+};

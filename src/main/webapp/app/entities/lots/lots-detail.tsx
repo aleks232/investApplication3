@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
 import { getEntity } from './lots.reducer';
-import { ILots } from 'app/shared/model/lots.model';
+import { getFilteredOrders } from 'app/entities/orders/orders.reducer';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { Roles } from 'app/shared/auth/constants';
 
@@ -16,17 +16,26 @@ const checkAdmin = (roles: Roles[]) => roles.includes(Roles.ROLE_ADMIN);
 export interface ILotsDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const LotsDetail = (props: ILotsDetailProps) => {
-  useEffect(() => {
-    props.getEntity(props.match.params.id);
-  }, []);
-
-  const { lotsEntity, user } = props;
+  const { 
+    lotsEntity, 
+    user, 
+    getEntity: getEntityData, 
+    getFilteredOrders: getFilteredOrdersList,
+    filteredOrders,
+   } = props;
 
   const isAdmin = React.useMemo(() => user.authorities && checkAdmin(user.authorities as Roles[]), [user]);
 
+  useEffect(() => {
+    getEntityData(props.match.params.id);
+    getFilteredOrdersList({
+      lotId: props.match.params.id,
+    });
+  }, []);
+
   return (
     <Row>
-      <Col md="8">
+      <Col>
         <h2>
           <Translate contentKey="investApplication3App.lots.detail.title">Lots</Translate> [<b>{lotsEntity.id}</b>]
         </h2>
@@ -56,6 +65,31 @@ export const LotsDetail = (props: ILotsDetailProps) => {
           </dt>
           <dd>{lotsEntity.endDate ? <TextFormat value={lotsEntity.endDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
         </dl>
+        <h4>
+          {
+            Boolean(filteredOrders.length) &&  <Translate contentKey="investApplication3App.orders.home.title">Orders</Translate>
+          }
+        </h4>
+        <div className="orders-container">
+          {
+            filteredOrders?.map((item) => (
+              <div className="card order-card" >
+                <div className="card-body">
+                  <Link to={`/orders/${item.id}`}>{item.id}</Link>
+                  <br/>
+                  <Translate contentKey={`investApplication3App.OrderStatus.${item.orderStatus}`} />
+                  <br/>
+                  {item.price}
+                  <br/>
+                  {item.payments}
+                  <br/>
+                  <TextFormat value={item.startDate} type="date" format={APP_DATE_FORMAT} />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <br/>
         <Button tag={Link} to="/lots" replace color="info">
           <FontAwesomeIcon icon="arrow-left" />{' '}
           <span className="d-none d-md-inline">
@@ -82,12 +116,13 @@ export const LotsDetail = (props: ILotsDetailProps) => {
   );
 };
 
-const mapStateToProps = ({ lots, authentication }: IRootState) => ({
+const mapStateToProps = ({ lots, authentication, orders }: IRootState) => ({
   lotsEntity: lots.entity,
   user: authentication.account,
+  filteredOrders: orders.filteredOrders,
 });
 
-const mapDispatchToProps = { getEntity };
+const mapDispatchToProps = { getEntity, getFilteredOrders };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

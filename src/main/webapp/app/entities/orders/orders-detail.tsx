@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
 import { getEntity } from './orders.reducer';
-import { IOrders } from 'app/shared/model/orders.model';
+import { getFilteredDocuments } from 'app/entities/documents/documents.reducer';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
 export interface IOrdersDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
@@ -15,12 +15,15 @@ export interface IOrdersDetailProps extends StateProps, DispatchProps, RouteComp
 export const OrdersDetail = (props: IOrdersDetailProps) => {
   useEffect(() => {
     props.getEntity(props.match.params.id);
+    props.getFilteredDocuments(
+      props.match.params.id,
+    );
   }, []);
 
-  const { ordersEntity } = props;
+  const { ordersEntity, filteredDocuments } = props;
   return (
     <Row>
-      <Col md="8">
+      <Col>
         <h2>
           <Translate contentKey="investApplication3App.orders.detail.title">Orders</Translate> [<b>{ordersEntity.id}</b>]
         </h2>
@@ -48,13 +51,15 @@ export const OrdersDetail = (props: IOrdersDetailProps) => {
               <Translate contentKey="investApplication3App.orders.paymentType">Payment Type</Translate>
             </span>
           </dt>
-          <dd>{ordersEntity.paymentType}</dd>
+          <dd><Translate contentKey={`investApplication3App.PaymentType.${ordersEntity.paymentType}`} /></dd>
           <dt>
             <span id="orderStatus">
               <Translate contentKey="investApplication3App.orders.orderStatus">Order Status</Translate>
             </span>
           </dt>
-          <dd>{ordersEntity.orderStatus}</dd>
+          <dd>
+            <Translate contentKey={`investApplication3App.OrderStatus.${ordersEntity.orderStatus}`} />
+          </dd>
           <dt>
             <span id="employeeId">
               <Translate contentKey="investApplication3App.orders.employeeId">Employee Id</Translate>
@@ -66,6 +71,27 @@ export const OrdersDetail = (props: IOrdersDetailProps) => {
           </dt>
           <dd>{ordersEntity.lotId ? ordersEntity.lotId : ''}</dd>
         </dl>
+        <h4>
+          {
+            Boolean(filteredDocuments.length) &&  <Translate contentKey="investApplication3App.documents.home.title">Documents</Translate>
+          }
+        </h4>
+        <div className="orders-container">
+          {
+            filteredDocuments?.map((item) => (
+              <div className="card order-card" >
+                <div className="card-body">
+                  <Link to={`/documents/${item.id}`}>{item.id}</Link>
+                  <br/>
+                  {item.title}
+                  <br/>
+                  {item.type}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <br/>
         <Button tag={Link} to="/orders" replace color="info">
           <FontAwesomeIcon icon="arrow-left" />{' '}
           <span className="d-none d-md-inline">
@@ -79,16 +105,23 @@ export const OrdersDetail = (props: IOrdersDetailProps) => {
             <Translate contentKey="entity.action.edit">Edit</Translate>
           </span>
         </Button>
+        &nbsp;
+        <Button tag={Link} to={`/documents/new/${props.match.params.id}`} replace color="primary">
+          <FontAwesomeIcon icon="plus" />
+          &nbsp;
+          <Translate contentKey="investApplication3App.documents.home.createLabel">Create new Documents</Translate>
+        </Button>
       </Col>
     </Row>
   );
 };
 
-const mapStateToProps = ({ orders }: IRootState) => ({
+const mapStateToProps = ({ orders, documents }: IRootState) => ({
   ordersEntity: orders.entity,
+  filteredDocuments: documents.filteredDocuments
 });
 
-const mapDispatchToProps = { getEntity };
+const mapDispatchToProps = { getEntity, getFilteredDocuments };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

@@ -1,10 +1,10 @@
-import { IDocuments } from 'app/shared/model/documents.model';
+import { DocumentsDTO } from 'app/swagger/model/documentsDTO';
 
 export interface IPackages {
   id?: number;
   title?: string;
   description?: string;
-  documents?: IDocuments[];
+  documents?: DocumentsDTO[];
   lotId?: number;
 }
 

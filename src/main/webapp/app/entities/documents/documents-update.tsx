@@ -11,7 +11,7 @@ import { getEntities as getPackages } from 'app/entities/packages/packages.reduc
 import { getEntity, updateEntity, createEntity, reset, uploadFile } from './documents.reducer';
 import { getFormData, initUploadFile } from 'app/entities/documents/utils';
 
-export interface IDocumentsUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
+export interface IDocumentsUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string; orderId?: string }> {}
 
 export const DocumentsUpdate = (props: IDocumentsUpdateProps) => {
   const [packageDocumentId, setPackageDocumentId] = useState('0');
@@ -19,8 +19,21 @@ export const DocumentsUpdate = (props: IDocumentsUpdateProps) => {
 
   const { documentsEntity, packages, loading, updating, fileInfo } = props;
 
+  const orderId = props.match.params.orderId;
+
+  const documentForm = React.useMemo(
+    () => {
+      if (isNew) {
+        return {
+          ...(orderId ? { orderId: Number(orderId)} : {}),
+        }
+      }
+      return documentsEntity;
+    }, []
+  );
+
   const handleClose = () => {
-    props.history.push('/documents');
+    orderId ? props.history.push(`/orders/${orderId}`) : props.history.push('/documents');
   };
 
   useEffect(() => {
@@ -42,7 +55,7 @@ export const DocumentsUpdate = (props: IDocumentsUpdateProps) => {
   const saveEntity = (event, errors, values) => {
     if (errors.length === 0) {
       const entity = {
-        ...documentsEntity,
+        ...documentForm,
         ...values,
         ...(fileInfo ? {fileId: fileInfo.id} : null)
       };
@@ -62,8 +75,6 @@ export const DocumentsUpdate = (props: IDocumentsUpdateProps) => {
     props.uploadFile(formData);
   }, [props.uploadFile])
 
-
-
   return (
     <div>
       <Row className="justify-content-center">
@@ -78,7 +89,7 @@ export const DocumentsUpdate = (props: IDocumentsUpdateProps) => {
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <AvForm model={isNew ? {} : documentsEntity} onSubmit={saveEntity}>
+            <AvForm model={documentForm} onSubmit={saveEntity}>
               {!isNew ? (
                 <AvGroup>
                   <Label for="documents-id">

@@ -1,10 +1,3 @@
-export interface IDocuments {
-  id?: number;
-  title?: string;
-  description?: string;
-  type?: string;
-  packageDocumentId?: number;
-  fileId?: number;
-}
+import { DocumentsDTO } from 'app/swagger/model/documentsDTO';
 
-export const defaultValue: Readonly<IDocuments> = {};
+export const defaultValue: Readonly<DocumentsDTO> = {};
