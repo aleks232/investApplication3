@@ -3,6 +3,7 @@ import { Storage } from 'react-jhipster';
 
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 import { setLocale } from 'app/shared/reducers/locale';
+import { UserDTO } from 'app/swagger/model/userDTO';
 
 export const ACTION_TYPES = {
   LOGIN: 'authentication/LOGIN',
@@ -20,7 +21,7 @@ const initialState = {
   loginSuccess: false,
   loginError: false, // Errors returned from server side
   showModalLogin: false,
-  account: {} as any,
+  account: {} as UserDTO,
   errorMessage: (null as unknown) as string, // Errors returned from server side
   redirectMessage: (null as unknown) as string,
   sessionHasBeenFetched: false,

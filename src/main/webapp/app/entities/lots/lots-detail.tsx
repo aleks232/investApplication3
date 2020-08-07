@@ -9,6 +9,9 @@ import { IRootState } from 'app/shared/reducers';
 import { getEntity } from './lots.reducer';
 import { ILots } from 'app/shared/model/lots.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+import { Roles } from 'app/shared/auth/constants';
+
+const checkAdmin = (roles: Roles[]) => roles.includes(Roles.ROLE_ADMIN);
 
 export interface ILotsDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
@@ -17,7 +20,10 @@ export const LotsDetail = (props: ILotsDetailProps) => {
     props.getEntity(props.match.params.id);
   }, []);
 
-  const { lotsEntity } = props;
+  const { lotsEntity, user } = props;
+
+  const isAdmin = React.useMemo(() => user.authorities && checkAdmin(user.authorities as Roles[]), [user]);
+
   return (
     <Row>
       <Col md="8">
@@ -63,13 +69,22 @@ export const LotsDetail = (props: ILotsDetailProps) => {
             <Translate contentKey="entity.action.edit">Edit</Translate>
           </span>
         </Button>
+        &nbsp;
+        <Button tag={Link} to={`/orders/new/${lotsEntity.id}`} replace color="primary">
+          <FontAwesomeIcon icon="plus" />
+          &nbsp;
+          <span className="d-none d-md-inline">
+          <Translate contentKey="investApplication3App.orders.home.createLabel">Create new Orders</Translate>
+          </span>
+        </Button>
       </Col>
     </Row>
   );
 };
 
-const mapStateToProps = ({ lots }: IRootState) => ({
+const mapStateToProps = ({ lots, authentication }: IRootState) => ({
   lotsEntity: lots.entity,
+  user: authentication.account,
 });
 
 const mapDispatchToProps = { getEntity };
