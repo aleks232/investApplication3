@@ -36,6 +36,10 @@ public class Documents implements Serializable {
     @JsonIgnoreProperties(value = "documents", allowSetters = true)
     private Packages packageDocument;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = "documents", allowSetters = true)
+    private Orders order;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -106,6 +110,14 @@ public class Documents implements Serializable {
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    public Orders getOrder() {
+        return order;
+    }
+
+    public void setOrder(Orders order) {
+        this.order = order;
+    }
 
     @Override
     public boolean equals(Object o) {

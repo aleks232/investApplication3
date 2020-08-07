@@ -18,6 +18,8 @@ public class DocumentsDTO implements Serializable {
 
     private Long fileId;
 
+    private Long orderId;
+
     public Long getId() {
         return id;
     }
@@ -64,6 +66,14 @@ public class DocumentsDTO implements Serializable {
 
     public void setFileId(Long fileId) {
         this.fileId = fileId;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     @Override

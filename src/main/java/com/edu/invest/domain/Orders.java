@@ -1,19 +1,15 @@
 package com.edu.invest.domain;
 
+import com.edu.invest.domain.enumeration.OrderStatus;
+import com.edu.invest.domain.enumeration.PaymentType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.edu.invest.domain.enumeration.PaymentType;
-
-import com.edu.invest.domain.enumeration.OrderStatus;
+import javax.persistence.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Orders.
@@ -22,7 +18,6 @@ import com.edu.invest.domain.enumeration.OrderStatus;
 @Table(name = "orders")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Orders implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -57,6 +52,13 @@ public class Orders implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = "orders", allowSetters = true)
     private Lots lot;
+
+    @Column(name = "is_deleted")
+    private Integer isDeleted;
+
+    @OneToMany(mappedBy = "order")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Documents> documents = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -182,7 +184,24 @@ public class Orders implements Serializable {
     public void setLot(Lots lots) {
         this.lot = lots;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Set<Documents> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(Set<Documents> documents) {
+        this.documents = documents;
+    }
 
     @Override
     public boolean equals(Object o) {
