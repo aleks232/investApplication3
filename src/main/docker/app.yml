@@ -1,7 +1,7 @@
 version: '2'
 services:
   investapplication3-app:
-    image: aleks23202/investapplication:0.2
+    image: aleks23202/investapplication:0.4
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,swagger

@@ -7,12 +7,16 @@
         Added the constraints for entity Documents.
     -->
     <changeSet id="20200727115043-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="package_document_id"
                                  baseTableName="documents"
                                  constraintName="fk_documents_package_document_id"
                                  referencedColumnNames="id"
                                  referencedTableName="packages"/>
-
+        <addForeignKeyConstraint baseColumnNames="order_id"
+                                 baseTableName="documents"
+                                 constraintName="fk_documents_order_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="orders"/>
     </changeSet>
 </databaseChangeLog>

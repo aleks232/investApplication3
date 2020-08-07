@@ -4,7 +4,7 @@ jib {
     }
     to {
         image = "aleks23202/investapplication"
-        tags = ['0.2', 'latest']
+        tags = ['0.4', 'latest']
     }
     container {
         entrypoint = ["bash", "-c", "/entrypoint.sh"]
