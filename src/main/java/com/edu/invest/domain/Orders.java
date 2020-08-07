@@ -54,7 +54,7 @@ public class Orders implements Serializable {
     private Lots lot;
 
     @Column(name = "is_deleted")
-    private Integer isDeleted;
+    private Integer isDeleted = 0;
 
     @OneToMany(mappedBy = "order")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

@@ -1,7 +1,6 @@
 package com.edu.invest.service;
 
 import com.edu.invest.service.dto.OrdersDTO;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +8,6 @@ import java.util.Optional;
  * Service Interface for managing {@link com.edu.invest.domain.Orders}.
  */
 public interface OrdersService {
-
     /**
      * Save a orders.
      *
@@ -25,6 +23,7 @@ public interface OrdersService {
      */
     List<OrdersDTO> findAll();
 
+    List<OrdersDTO> findOrders(Long lotId, String orderStatus);
 
     /**
      * Get the "id" orders.

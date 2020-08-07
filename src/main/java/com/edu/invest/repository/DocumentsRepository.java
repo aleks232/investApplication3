@@ -1,7 +1,8 @@
 package com.edu.invest.repository;
 
 import com.edu.invest.domain.Documents;
-
+import com.edu.invest.domain.Orders;
+import java.util.List;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +12,5 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface DocumentsRepository extends JpaRepository<Documents, Long> {
+    List<Documents> findByOrder(Orders order);
 }
