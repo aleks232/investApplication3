@@ -1,21 +1,19 @@
 package com.edu.invest.web.rest;
 
 import com.edu.invest.service.OrdersService;
-import com.edu.invest.web.rest.errors.BadRequestAlertException;
 import com.edu.invest.service.dto.OrdersDTO;
-
+import com.edu.invest.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.edu.invest.domain.Orders}.
@@ -23,7 +21,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class OrdersResource {
-
     private final Logger log = LoggerFactory.getLogger(OrdersResource.class);
 
     private static final String ENTITY_NAME = "orders";
@@ -51,7 +48,8 @@ public class OrdersResource {
             throw new BadRequestAlertException("A new orders cannot already have an ID", ENTITY_NAME, "idexists");
         }
         OrdersDTO result = ordersService.save(ordersDTO);
-        return ResponseEntity.created(new URI("/api/orders/" + result.getId()))
+        return ResponseEntity
+            .created(new URI("/api/orders/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -72,7 +70,8 @@ public class OrdersResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         OrdersDTO result = ordersService.save(ordersDTO);
-        return ResponseEntity.ok()
+        return ResponseEntity
+            .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, ordersDTO.getId().toString()))
             .body(result);
     }
@@ -86,6 +85,12 @@ public class OrdersResource {
     public List<OrdersDTO> getAllOrders() {
         log.debug("REST request to get all Orders");
         return ordersService.findAll();
+    }
+
+    @GetMapping("/find/orders")
+    public List<OrdersDTO> findOrders(@RequestParam Long lotId, @RequestParam(required = false) String orderStatus) {
+        log.debug("REST request to get find Orders");
+        return ordersService.findOrders(lotId, orderStatus);
     }
 
     /**
@@ -111,6 +116,9 @@ public class OrdersResource {
     public ResponseEntity<Void> deleteOrders(@PathVariable Long id) {
         log.debug("REST request to delete Orders : {}", id);
         ordersService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

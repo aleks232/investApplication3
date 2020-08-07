@@ -1,7 +1,6 @@
 package com.edu.invest.service;
 
 import com.edu.invest.service.dto.DocumentsDTO;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +8,6 @@ import java.util.Optional;
  * Service Interface for managing {@link com.edu.invest.domain.Documents}.
  */
 public interface DocumentsService {
-
     /**
      * Save a documents.
      *
@@ -25,6 +23,7 @@ public interface DocumentsService {
      */
     List<DocumentsDTO> findAll();
 
+    List<DocumentsDTO> findDocuments(Long orderId);
 
     /**
      * Get the "id" documents.
