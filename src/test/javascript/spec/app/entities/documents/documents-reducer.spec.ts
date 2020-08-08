@@ -15,7 +15,8 @@ import reducer, {
   reset,
 } from 'app/entities/documents/documents.reducer';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
-import { IDocuments, defaultValue } from 'app/shared/model/documents.model';
+import { defaultValue } from 'app/shared/model/documents.model';
+import { DocumentsDTO } from 'app/swagger/model/documentsDTO';
 
 describe('Entities reducer tests', () => {
   function isEmpty(element): boolean {
@@ -29,8 +30,9 @@ describe('Entities reducer tests', () => {
   const initialState = {
     loading: false,
     errorMessage: null,
-    entities: [] as ReadonlyArray<IDocuments>,
+    entities: [] as ReadonlyArray<DocumentsDTO>,
     entity: defaultValue,
+    filteredDocuments: [],
     updating: false,
     updateSuccess: false,
     fileInfo: null,

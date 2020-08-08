@@ -14,6 +14,7 @@ export interface DocumentsDTO {
   description?: string;
   fileId?: number;
   id?: number;
+  orderId?: number;
   packageDocumentId?: number;
   title?: string;
   type?: string;

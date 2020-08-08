@@ -14,16 +14,29 @@ import { IOrders } from 'app/shared/model/orders.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 
-export interface IOrdersUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
+export interface IOrdersUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string, lotId?: string }> {}
 
 export const OrdersUpdate = (props: IOrdersUpdateProps) => {
-  const [lotId, setLotId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { ordersEntity, lots, loading, updating } = props;
+  const { ordersEntity, lots, loading, updating, user } = props;
+
+  const lotId = props.match.params.lotId;
+
+  const ordersForm = React.useMemo(
+    () => {
+      if (isNew) {
+        return {
+          ...(lotId ? { lotId: Number(lotId)} : {}),
+          employeeId: user.id
+        }
+      }
+      return ordersEntity;
+    }, []
+  );
 
   const handleClose = () => {
-    props.history.push('/orders');
+    lotId ? props.history.push(`/lots/${lotId}`) : props.history.push('/orders');
   };
 
   useEffect(() => {
@@ -48,7 +61,7 @@ export const OrdersUpdate = (props: IOrdersUpdateProps) => {
 
     if (errors.length === 0) {
       const entity = {
-        ...ordersEntity,
+        ...ordersForm,
         ...values,
       };
 
@@ -74,7 +87,7 @@ export const OrdersUpdate = (props: IOrdersUpdateProps) => {
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <AvForm model={isNew ? {} : ordersEntity} onSubmit={saveEntity}>
+            <AvForm model={ordersForm} onSubmit={saveEntity}>
               {!isNew ? (
                 <AvGroup>
                   <Label for="orders-id">
@@ -113,7 +126,7 @@ export const OrdersUpdate = (props: IOrdersUpdateProps) => {
                 <Label id="priceLabel" for="orders-price">
                   <Translate contentKey="investApplication3App.orders.price">Price</Translate>
                 </Label>
-                <AvField id="orders-price" type="string" className="form-control" name="price" />
+                <AvField id="orders-price" type="string" className="form-control" name="price" required />
               </AvGroup>
               <AvGroup>
                 <Label id="paymentTypeLabel" for="orders-paymentType">
@@ -153,13 +166,13 @@ export const OrdersUpdate = (props: IOrdersUpdateProps) => {
                   <option value="PAY_DIVIDENTS">{translate('investApplication3App.OrderStatus.PAY_DIVIDENTS')}</option>
                 </AvInput>
               </AvGroup>
-              <AvGroup>
+              {/* <AvGroup>
                 <Label id="employeeIdLabel" for="orders-employeeId">
                   <Translate contentKey="investApplication3App.orders.employeeId">Employee Id</Translate>
                 </Label>
                 <AvField id="orders-employeeId" type="string" className="form-control" name="employeeId" />
-              </AvGroup>
-              <AvGroup>
+              </AvGroup> */}
+              {/* <AvGroup>
                 <Label for="orders-lot">
                   <Translate contentKey="investApplication3App.orders.lot">Lot</Translate>
                 </Label>
@@ -173,7 +186,7 @@ export const OrdersUpdate = (props: IOrdersUpdateProps) => {
                       ))
                     : null}
                 </AvInput>
-              </AvGroup>
+              </AvGroup> */}
               <Button tag={Link} id="cancel-save" to="/orders" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
@@ -201,6 +214,7 @@ const mapStateToProps = (storeState: IRootState) => ({
   loading: storeState.orders.loading,
   updating: storeState.orders.updating,
   updateSuccess: storeState.orders.updateSuccess,
+  user: storeState.authentication.account,
 });
 
 const mapDispatchToProps = {

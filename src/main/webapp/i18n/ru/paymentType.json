@@ -2,8 +2,8 @@
   "investApplication3App": {
     "PaymentType": {
       "null": "",
-      "CACHE": "CACHE",
-      "CARD": "CARD"
+      "CACHE": "Наличные",
+      "CARD": "Карта"
     }
   }
 }

@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
 import { getEntities } from './documents.reducer';
-import { IDocuments } from 'app/shared/model/documents.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
 export interface IDocumentsProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
