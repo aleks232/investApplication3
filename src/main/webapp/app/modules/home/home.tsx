@@ -2,13 +2,14 @@ import './home.scss';
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Translate } from 'react-jhipster';
+import { Translate, TextFormat } from 'react-jhipster';
 import { connect } from 'react-redux';
 import { Row, Col, Alert } from 'reactstrap';
 
 import { IRootState } from 'app/shared/reducers';
 
 import { getEntities } from 'app/entities/lots/lots.reducer';
+import { APP_DATE_FORMAT } from 'app/config/constants';
 
 export interface IHomeProp extends StateProps, DispatchProps {}
 
@@ -42,7 +43,11 @@ export const Home = (props: IHomeProp) => {
                 lastThreeLots.map((lot) => (
                   <li key={lot.id}>
                     <Link to={`/lots/${lot.id}`}>
-                      Лот {lot.id}: {lot.description}
+                      Лот {lot.id}: {lot.description} {Number(lot.minPrice).toLocaleString("ru-RU", {
+                        style: 'currency',
+                        currency: 'RUB'
+                      })} &nbsp;
+                      <TextFormat type="date" value={lot.startDate} format={APP_DATE_FORMAT}/>
                     </Link>
                   </li>
                 ))

@@ -3,18 +3,18 @@
     "orders": {
       "home": {
         "title": "Orders",
-        "createLabel": "Create a new Orders",
-        "createOrEditLabel": "Create or edit a Orders",
+        "createLabel": "Create a new Order",
+        "createOrEditLabel": "Create or edit a Order",
         "notFound": "No Orders found"
       },
-      "created": "A new Orders is created with identifier {{ param }}",
-      "updated": "A Orders is updated with identifier {{ param }}",
-      "deleted": "A Orders is deleted with identifier {{ param }}",
+      "created": "A new Order is created with identifier {{ param }}",
+      "updated": "A Order is updated with identifier {{ param }}",
+      "deleted": "A Order is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Orders {{ id }}?"
+        "question": "Are you sure you want to delete Order {{ id }}?"
       },
       "detail": {
-        "title": "Orders"
+        "title": "Order"
       },
       "startDate": "Start Date",
       "endDate": "End Date",

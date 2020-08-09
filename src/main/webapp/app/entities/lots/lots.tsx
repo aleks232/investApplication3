@@ -11,6 +11,8 @@ import { ILots } from 'app/shared/model/lots.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
+import { checkAdmin } from 'app/shared/util';
+import { Roles } from 'app/shared/auth/constants';
 
 export interface ILotsProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
@@ -64,16 +66,23 @@ export const Lots = (props: ILotsProps) => {
       activePage: currentPage,
     });
 
-  const { lotsList, match, loading, totalItems } = props;
+  const { lotsList, match, loading, totalItems, user } = props;
+
+  const isAdmin = React.useMemo(() => user.authorities && checkAdmin(user.authorities as Roles[]), [user]);
+
   return (
     <div>
       <h2 id="lots-heading">
         <Translate contentKey="investApplication3App.lots.home.title">Lots</Translate>
-        <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-          <FontAwesomeIcon icon="plus" />
-          &nbsp;
-          <Translate contentKey="investApplication3App.lots.home.createLabel">Create new Lots</Translate>
-        </Link>
+        {
+          isAdmin && (
+            <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
+              <FontAwesomeIcon icon="plus" />
+              &nbsp;
+              <Translate contentKey="investApplication3App.lots.home.createLabel">Create new Lots</Translate>
+            </Link>
+          )
+        }
       </h2>
       <div className="table-responsive">
         {lotsList && lotsList.length > 0 ? (
@@ -118,28 +127,35 @@ export const Lots = (props: ILotsProps) => {
                           <Translate contentKey="entity.action.view">View</Translate>
                         </span>
                       </Button>
-                      <Button
-                        tag={Link}
-                        to={`${match.url}/${lots.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                        color="primary"
-                        size="sm"
-                      >
-                        <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
-                      </Button>
-                      <Button
-                        tag={Link}
-                        to={`${match.url}/${lots.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                        color="danger"
-                        size="sm"
-                      >
-                        <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
-                      </Button>
+                      {
+                        isAdmin && (
+                          <React.Fragment>
+                            <Button
+                              tag={Link}
+                              to={`${match.url}/${lots.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                              color="primary"
+                              size="sm"
+                            >
+                              <FontAwesomeIcon icon="pencil-alt" />{' '}
+                              <span className="d-none d-md-inline">
+                                <Translate contentKey="entity.action.edit">Edit</Translate>
+                              </span>
+                            </Button>
+                            <Button
+                              tag={Link}
+                              to={`${match.url}/${lots.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                              color="danger"
+                              size="sm"
+                            >
+                              <FontAwesomeIcon icon="trash" />{' '}
+                              <span className="d-none d-md-inline">
+                                <Translate contentKey="entity.action.delete">Delete</Translate>
+                              </span>
+                            </Button>
+                          </React.Fragment>
+                        )
+                      }
+                      
                     </div>
                   </td>
                 </tr>
@@ -176,9 +192,10 @@ export const Lots = (props: ILotsProps) => {
   );
 };
 
-const mapStateToProps = ({ lots }: IRootState) => ({
+const mapStateToProps = ({ lots, authentication }: IRootState) => ({
   lotsList: lots.entities,
   loading: lots.loading,
+  user: authentication.account,
   totalItems: lots.totalItems,
 });
 

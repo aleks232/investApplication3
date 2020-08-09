@@ -1,4 +1,5 @@
 import { isNullOrUndefined } from 'util';
+import { Roles } from 'app/shared/auth/constants';
 
 export const saveBlobFile = (fileString: string, fileName: string, type?: string) => {
   const a = document.createElement('a');
@@ -21,3 +22,5 @@ export const checkObj = <T extends {}>(obj?: T | null): T => {
   });
   return objectToCheck;
 };
+
+export const checkAdmin = (roles: Roles[]) => roles.includes(Roles.ROLE_ADMIN);
